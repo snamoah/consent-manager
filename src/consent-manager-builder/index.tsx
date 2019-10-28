@@ -133,7 +133,8 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       otherWriteKeys = ConsentManagerBuilder.defaultProps.otherWriteKeys,
       shouldRequireConsent = ConsentManagerBuilder.defaultProps.shouldRequireConsent,
       initialPreferences,
-      mapCustomPreferences
+      mapCustomPreferences,
+      onConsent
     } = this.props
     // TODO: add option to run mapCustomPreferences on load so that the destination preferences automatically get updated
     let { destinationPreferences = {}, customPreferences } = loadPreferences()
@@ -167,7 +168,8 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired
+      isConsentRequired,
+      onConsent
     })
 
     this.setState({

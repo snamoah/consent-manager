@@ -42,12 +42,14 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
       cancelDialogTitle,
       cancelDialogContent,
       initialPreferences,
-      onError
+      onError,
+      onConsent
     } = this.props
 
     return (
       <ConsentManagerBuilder
         onError={onError}
+        onConsent={onConsent}
         writeKey={writeKey}
         otherWriteKeys={otherWriteKeys}
         shouldRequireConsent={shouldRequireConsent}
@@ -64,27 +66,31 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
           resetPreferences,
           saveConsent
         }) => {
-          return <Container
-            destinations={destinations}
-            newDestinations={newDestinations}
-            preferences={preferences}
-            isConsentRequired={isConsentRequired}
-            setPreferences={setPreferences}
-            resetPreferences={resetPreferences}
-            saveConsent={saveConsent}
-            closeBehavior={this.props.closeBehavior}
-            implyConsentOnInteraction={implyConsentOnInteraction ?? ConsentManager.defaultProps.implyConsentOnInteraction}
-            bannerContent={bannerContent}
-            bannerSubContent={bannerSubContent}
-            bannerTextColor={bannerTextColor || ConsentManager.defaultProps.bannerTextColor}
-            bannerBackgroundColor={
-              bannerBackgroundColor || ConsentManager.defaultProps.bannerBackgroundColor
-            }
-            preferencesDialogTitle={preferencesDialogTitle}
-            preferencesDialogContent={preferencesDialogContent}
-            cancelDialogTitle={cancelDialogTitle}
-            cancelDialogContent={cancelDialogContent}
-          />
+          return (
+            <Container
+              destinations={destinations}
+              newDestinations={newDestinations}
+              preferences={preferences}
+              isConsentRequired={isConsentRequired}
+              setPreferences={setPreferences}
+              resetPreferences={resetPreferences}
+              saveConsent={saveConsent}
+              closeBehavior={this.props.closeBehavior}
+              implyConsentOnInteraction={
+                implyConsentOnInteraction || ConsentManager.defaultProps.implyConsentOnInteraction
+              }
+              bannerContent={bannerContent}
+              bannerSubContent={bannerSubContent}
+              bannerTextColor={bannerTextColor || ConsentManager.defaultProps.bannerTextColor}
+              bannerBackgroundColor={
+                bannerBackgroundColor || ConsentManager.defaultProps.bannerBackgroundColor
+              }
+              preferencesDialogTitle={preferencesDialogTitle}
+              preferencesDialogContent={preferencesDialogContent}
+              cancelDialogTitle={cancelDialogTitle}
+              cancelDialogContent={cancelDialogContent}
+            />
+          )
         }}
       </ConsentManagerBuilder>
     )

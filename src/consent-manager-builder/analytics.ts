@@ -6,14 +6,16 @@ interface AnalyticsParams {
   destinationPreferences: object | null
   isConsentRequired: boolean
   shouldReload?: boolean
+  onConsent?: () => void | Promise<void>
 }
 
-export default function conditionallyLoadAnalytics({
+export default async function conditionallyLoadAnalytics({
   writeKey,
   destinations,
   destinationPreferences,
   isConsentRequired,
-  shouldReload = true
+  shouldReload = true,
+  onConsent = () => {}
 }: AnalyticsParams) {
   const wd = window as WindowWithAJS
   const integrations = { All: false, 'Segment.io': true }
@@ -51,5 +53,6 @@ export default function conditionallyLoadAnalytics({
   // Don't load a.js at all if nothing has been enabled
   if (isAnythingEnabled) {
     wd.analytics.load(writeKey, { integrations })
+    await onConsent()
   }
 }
