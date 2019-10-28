@@ -57,6 +57,8 @@ interface Props {
    * A callback for dealing with errors in the Consent Manager
    */
   onError?: (err: Error) => void | Promise<void>
+
+  onConsent?: () => void | Promise<void>
 }
 
 interface RenderProps {
